@@ -4,13 +4,13 @@ import { useCallback, useState } from "react";
 import Button from "@/components/Button";
 
 const OnboardPage = () => {
-    const [profilePicture, setProfilePicture] = useState<any>({
+    const [profilePicture, setProfilePicture] = useState<{ url: string, file: File | null, isDefault: boolean }>({
         url: avatars[0].url,
         file: null,
         isDefault: true
     });
 
-    const [usernameError, setUsernameError] = useState<any>({
+    const [usernameError, setUsernameError] = useState<{ error: boolean, message: string | null }>({
         error: false,
         message: null
     });
@@ -35,7 +35,7 @@ const OnboardPage = () => {
 
 
     const handleProfilePictureUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
+        const file: File | undefined = e.target.files?.[0];
         if (file) {
             setProfilePicture({
                 url: URL.createObjectURL(file),

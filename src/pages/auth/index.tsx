@@ -10,7 +10,7 @@ const AuthPage = () => {
                         Hey buddy!
                     </span>
                     <h1 className="text-5xl font-bold">
-                        Let's Chatsy
+                        Let&apos;s Chatsy
                     </h1>
 
                     <br /><br /><br />

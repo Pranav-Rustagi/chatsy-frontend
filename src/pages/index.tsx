@@ -7,7 +7,7 @@ const RootPage = () => {
 
     useEffect(() => {
         router.replace("/auth");
-    }, []);
+    }, [router]);
 
     return (
         <div className="flex justify-center items-center h-screen">
