@@ -5,9 +5,9 @@ import { useEffect } from "react";
 const RootPage = () => {
     const router = useRouter();
 
-    // useEffect(() => {
-    //     router.replace("/auth");
-    // }, []);
+    useEffect(() => {
+        router.replace("/auth");
+    }, []);
 
     return (
         <div className="flex justify-center items-center h-screen">
