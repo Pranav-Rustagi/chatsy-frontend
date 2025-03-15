@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+    --chatsy-dark: #171717;
+    --chatsy-light: #fafafa;
+    --chatsy-orange: #dd7a29;
+    --chatsy-shadow-color-light: #dcdcdc;
+    --chatsy-shadow-color-dark: #0a0a0a;
+
+    --chatsy-black-icon-invert: 1;
+
+    /* --chatsy-input-color: #333;
+    --chatsy-input-placeholder-color: #666;
+    --chatsy-input-border-color: #ccc; */
+
+    /* --chatsy-secondary-dark: #222;
+    --chatsy-ternary-dark: #333;
+    --chatsy-orange-primary: #c46b23;
+    --chatsy-almost-black: #0a0a0a;
+    --chatsy-black-transparent: #0a0a0a80; */
+
+
+    --chatsy-bg: var(--chatsy-light);
+    --chatsy-text-main: var(--chatsy-dark);
+    --chatsy-action-bg: var(--chatsy-dark);
+    --chatsy-action-text: var(--chatsy-light);
+    --chatsy-shadow-color: var(--chatsy-shadow-color-light);
+}
+
+html.dark {
+    --chatsy-bg: var(--chatsy-dark);
+    --chatsy-text-main: var(--color-white);
+    --chatsy-action-bg: var(--chatsy-orange);
+    --chatsy-action-text: var(--chatsy-light);
+    --chatsy-shadow-color: var(--chatsy-shadow-color-dark);
+
+    --chatsy-black-icon-invert: 0;
+}
+
+@theme inline {
+    /* --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono); */
+
+    --color-chatsy-bg: var(--chatsy-bg);
+    --color-chatsy-text-main: var(--chatsy-text-main);
+    --color-chatsy-text-dark: var(--chatsy-dark);
+    --color-chatsy-action-bg: var(--chatsy-action-bg);
+    --color-chatsy-action-text: var(--chatsy-action-text);
+
+    --color-chatsy-shadow: var(--chatsy-shadow-color);
+
+    --chatsy-black-icon-invert: var(--chatsy-black-icon-invert);
+
+    --animate-beat: beat 1s infinite;
+
+    /* -color-chatsy-background: var() */
+    /* --color-chatsy-dark: var(--background); */
+    /* --color-chatsy-secondary-dark: var(--chatsy-secondary-dark);
+    --color-chatsy-ternary-dark: var(--chatsy-ternary-dark);
+    --color-chatsy-orange-primary: var(--chatsy-orange-primary);
+    --color-chatsy-almost-black: var(--chatsy-almost-black);
+    --color-chatsy-black-transparent: var(--chatsy-black-transparent); */
+}
+
+
+@keyframes beat {
+    0%, 100% {
+        width: 10%;
+        animation-timing-function: cubic-bezier(0.8,0,1,1);
+    }
+    50% {
+        width: 30%;
+        animation-timing-function: cubic-bezier(0,0,0.2,1);
+    }
+}
+
+#__next {
+    height: 100vh;
+}
