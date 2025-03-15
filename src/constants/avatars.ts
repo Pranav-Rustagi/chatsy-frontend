@@ -1,4 +1,9 @@
-const avatars: Array<any> = [
+interface AvatarProps {
+    id: string;
+    url: string;
+}
+
+const avatars: Array<AvatarProps> = [
     {
         id: "avatar1",
         url: "/avatars/avatar1.jpg"
