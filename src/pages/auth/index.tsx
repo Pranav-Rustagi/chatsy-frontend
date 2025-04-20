@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "@/redux/reducers/userSlice";
 import { generateUserNameFromEmail, getHighQualityGoogleAvatar } from "@/utilities";
 import { CHECK_EXISTING_USER_ROUTE } from "@/constants/routes";
+import { RootState } from "@/redux/store/store";
 import { Button, Input } from "@/components";
 import Image from "next/image";
 import Head from "next/head";
@@ -14,7 +15,7 @@ import axios from "axios";
 const AuthPage = () => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const userInfo = useSelector((state: any) => state.userInfo);
+    const userInfo = useSelector((state: RootState) => state.userInfo);
 
     const handleUserLogin = async ({ email, avatar_url }: { email: string, avatar_url: string }) => {
         try {
@@ -63,11 +64,11 @@ const AuthPage = () => {
 
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(firebaseAuth, async (user: any) => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
             if (user && user.emailVerified) {
                 const userObj = {
-                    email: user.email,
-                    avatar_url: getHighQualityGoogleAvatar(user.photoURL)
+                    email: user.email as string,
+                    avatar_url: getHighQualityGoogleAvatar(user.photoURL as string)
                 }
 
                 handleUserLogin(userObj);
@@ -75,7 +76,7 @@ const AuthPage = () => {
         });
 
         return () => unsubscribe();
-    }, []);
+    }, [handleUserLogin]);
 
 
     return (

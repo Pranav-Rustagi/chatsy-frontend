@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "@/redux/reducers/userSlice";
+import { Button, Input } from "@/components";
+import { useRouter } from "next/router";
+import { RootState } from "@/redux/store/store";
 import Image from "next/image";
 import Head from "next/head";
 import avatars from "@/constants/avatars";
-import { Button, Input } from "@/components";
-import { useRouter } from "next/router";
 
 const OnboardPage = () => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const userInfo = useSelector((state: any) => state.userInfo);
+    const userInfo = useSelector((state: RootState) => state.userInfo);
 
     console.log(userInfo);
 
@@ -65,12 +65,16 @@ const OnboardPage = () => {
 
 
     const handleSetupProfile = useCallback(() => {
-        if (userInfo.username === "") {
+        if (userInfo.username === null) {
+            return;
+            
+        } else if (userInfo.username === "") {
             setUsernameError({
                 error: true,
                 message: "Username is required"
             });
             return;
+
         } else if (userInfo.username.length > 30) {
             setUsernameError({
                 error: true,
