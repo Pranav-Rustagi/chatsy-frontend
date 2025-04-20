@@ -1,6 +1,6 @@
 import { GoogleAuthProvider, onAuthStateChanged, signInWithRedirect } from "firebase/auth";
 import { firebaseAuth } from "@/config/firebase.config.js";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "@/redux/reducers/userSlice";
@@ -17,7 +17,7 @@ const AuthPage = () => {
     const dispatch = useDispatch();
     const userInfo = useSelector((state: RootState) => state.userInfo);
 
-    const handleUserLogin = async ({ email, avatar_url }: { email: string, avatar_url: string }) => {
+    const handleUserLogin = useCallback(async ({ email, avatar_url }: { email: string, avatar_url: string }) => {
         try {
             const response = await axios.post(CHECK_EXISTING_USER_ROUTE, { key: "email", value: email });
             const user = response.data.data.user;
@@ -41,7 +41,7 @@ const AuthPage = () => {
         } catch (error) {
             console.error(error);
         }
-    }
+    }, [dispatch, router]);
 
     const handleGoogleAuth = () => {
         const provider = new GoogleAuthProvider();
