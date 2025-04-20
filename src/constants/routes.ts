@@ -1,0 +1,8 @@
+const BASE_ROUTE = process.env.NEXT_PUBLIC_CHATSY_BACKEND_BASE_ROUTE;
+const AUTH_ROUTE = `${BASE_ROUTE}/api/auth`;
+
+const CHECK_EXISTING_USER_ROUTE = `${AUTH_ROUTE}/check-user`;
+
+export {
+    CHECK_EXISTING_USER_ROUTE
+};

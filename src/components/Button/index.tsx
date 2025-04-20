@@ -7,7 +7,7 @@ interface ButtonProps {
 
 const Button = ({ children = "Click me", variant = "md", onClick = () => {}, overrideClasses = [] }: ButtonProps) => {
     const sizeClasses: Record<string, string> = {
-        "sm": "px-2 py-1 text-xs font-light",
+        "sm": "px-4 py-2 text-xs font-light",
         "md": "px-4 py-3",
         "lg": "px-5 py-3 text-lg",
         "full": "w-full px-5 py-3 text-lg font-semibold"
