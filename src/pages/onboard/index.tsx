@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserInfo } from "@/redux/reducers/userSlice";
+import { setUserInfoData } from "@/redux/reducers/userInfo";
 import { Button, Input } from "@/components";
 import { useRouter } from "next/router";
 import { RootState } from "@/redux/store/store";
@@ -11,12 +11,12 @@ import avatars from "@/constants/avatars";
 const OnboardPage = () => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const userInfo = useSelector((state: RootState) => state.userInfo);
+    const userInfo = useSelector((state: RootState) => state.userInfo).data;
 
     console.log(userInfo);
 
     const [profilePicture, setProfilePicture] = useState<{ url: string, file: File | null, isDefault: boolean }>({
-        url: userInfo.avatar_url || avatars[0].url,
+        url: userInfo?.avatar_url || avatars[0].url,
         file: null,
         isDefault: true
     });
@@ -56,19 +56,16 @@ const OnboardPage = () => {
             error: false,
             message: null
         });
-        dispatch(setUserInfo({ username: e.target.value.trim() }));
+        dispatch(setUserInfoData({ username: e.target.value.trim() }));
     }
 
     const handleAboutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setUserInfo({ about: e.target.value }));
+        dispatch(setUserInfoData({ about: e.target.value }));
     }
 
 
     const handleSetupProfile = useCallback(() => {
-        if (userInfo.username === null) {
-            return;
-            
-        } else if (userInfo.username === "") {
+        if (!userInfo?.username) {
             setUsernameError({
                 error: true,
                 message: "Username is required"
@@ -89,12 +86,12 @@ const OnboardPage = () => {
             });
             return;
         }
-    }, [userInfo.username]);
+    }, [userInfo?.username]);
 
     useEffect(() => {
-        if (userInfo.onboarded) {
+        if (userInfo?.onboarded) {
             router.replace("/chats");
-        } else if (userInfo.email === null) {
+        } else if (userInfo?.email === null) {
             router.replace("/auth");
         }
     })
@@ -137,10 +134,10 @@ const OnboardPage = () => {
                             <Image
                                 src={profilePicture.url} alt="Profile picture"
                                 sizes="100vw" width="0" height="0"
-                                className="w-[175px] h-[175px] rounded-full object-cover border-8 border-neutral-200"
+                                className="w-[160px] h-[160px] rounded-full object-cover border-8 border-neutral-200"
                             />
 
-                            <div className="flex gap-5 mt-5">
+                            <div className="flex gap-5 mt-5 mb-5">
 
                                 <Button onClick={handleRandomAvatar} variant="sm" overrideClasses={["!font-bold", "!rounded-sm"]}>
                                     Random
@@ -163,7 +160,7 @@ const OnboardPage = () => {
                         <div className="w-full flex flex-col gap-6">
                             <div className="relative">
                                 <Input
-                                    value={userInfo.username || ""}
+                                    value={userInfo?.username || ""}
                                     onChange={handleUsernameChange}
                                     label="Username"
                                     error={usernameError.error}
@@ -173,7 +170,7 @@ const OnboardPage = () => {
 
                             <div className="relative">
                                 <Input
-                                    value={userInfo.about}
+                                    value={userInfo?.about}
                                     onChange={handleAboutChange}
                                     label="Bio"
                                     errorMessage={null}

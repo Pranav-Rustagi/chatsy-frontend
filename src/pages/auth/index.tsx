@@ -1,51 +1,50 @@
-import { GoogleAuthProvider, onAuthStateChanged, signInWithRedirect } from "firebase/auth";
-import { firebaseAuth } from "@/config/firebase.config.js";
-import { useCallback, useEffect } from "react";
+import { signInWithPopup } from "firebase/auth";
+import { firebaseAuth, googleAuthProvider } from "@/config/firebase.config.js";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserInfo } from "@/redux/reducers/userSlice";
+import { fetchGoogleUserData, setUserInfoData } from "@/redux/reducers/userInfo";
 import { generateUserNameFromEmail, getHighQualityGoogleAvatar } from "@/utilities";
-import { CHECK_EXISTING_USER_ROUTE } from "@/constants/routes";
-import { RootState } from "@/redux/store/store";
 import { Button, Input } from "@/components";
+import store, { RootState, StoreDispatch } from "@/redux/store/store";
 import Image from "next/image";
 import Head from "next/head";
-import axios from "axios";
 
 const AuthPage = () => {
     const router = useRouter();
-    const dispatch = useDispatch();
+
+    const dispatch = useDispatch<StoreDispatch>();
     const userInfo = useSelector((state: RootState) => state.userInfo);
 
-    const handleUserLogin = useCallback(async ({ email, avatar_url }: { email: string, avatar_url: string }) => {
-        try {
-            const response = await axios.post(CHECK_EXISTING_USER_ROUTE, { key: "email", value: email });
-            const user = response.data.data.user;
+    const handleGoogleAuth = async () => {
+        const authResult = await signInWithPopup(firebaseAuth, googleAuthProvider);
+        const idToken = await authResult.user.getIdToken() as string;
 
+        const actionResult = await dispatch(fetchGoogleUserData(idToken));
+
+        if (fetchGoogleUserData.rejected.match(actionResult)) {
+            // something went wrong
+            console.error("Something went wrong");
+            return;
+        }
+
+        const userInfo = store.getState().userInfo;
+        const user = authResult.user;
+
+        if (userInfo.data === null) {
             const user_data = {
-                email: user?.email || email,
-                username: user?.username || generateUserNameFromEmail(email),
-                avatar_url: user?.avatar_url || avatar_url || "",
-                onboarded: user?.onboarded || false,
-                about: user?.about || "Hey there! I'm using Chatsy."
+                email: user.email as string,
+                username: generateUserNameFromEmail(user.email as string),
+                avatar_url: getHighQualityGoogleAvatar(user.photoURL as string),
+                onboarded: false,
+                about: "Hey there! I'm using Chatsy."
             }
 
-            dispatch(setUserInfo(user_data));
-
-            if (user?.onboarded) {
-                router.replace("/chats");
-            }
+            dispatch(setUserInfoData(user_data));
 
             router.replace("/onboard");
-
-        } catch (error) {
-            console.error(error);
+        } else {
+            router.replace("/chats");
         }
-    }, [dispatch, router]);
-
-    const handleGoogleAuth = () => {
-        const provider = new GoogleAuthProvider();
-        signInWithRedirect(firebaseAuth, provider);
     }
 
 
@@ -59,25 +58,29 @@ const AuthPage = () => {
 
 
     const handleEmailInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setUserInfo({ email: e.target.value }));
+        dispatch(setUserInfoData({email: e.target.value}));
     }
 
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
-            if (user && user.emailVerified) {
-                const userObj = {
-                    email: user.email as string,
-                    avatar_url: getHighQualityGoogleAvatar(user.photoURL as string)
-                }
+    // useEffect(() => {
+    //     const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
+    //         const idToken = await user?.getIdToken();
+    //         console.log({
+    //             "onAuthStateChanged": idToken
+    //         });
 
-                handleUserLogin(userObj);
-            }
-        });
+            // if (user && user.emailVerified) {
+            //     const userObj = {
+            //         email: user.email as string,
+            //         avatar_url: getHighQualityGoogleAvatar(user.photoURL as string)
+            //     }
 
-        return () => unsubscribe();
-    }, [handleUserLogin]);
+            //     handleUserLogin(userObj);
+            // }
+        // });
 
+    //     return () => unsubscribe();
+    // }, [handleUserLogin]);
 
     return (
         <>
@@ -100,7 +103,7 @@ const AuthPage = () => {
                             <Input
                                 type="email"
                                 label="Email"
-                                value={userInfo.email || ""}
+                                value={userInfo.data?.email || ""}
                                 onChange={handleEmailInputChange}
                                 placeholder="e.g. john.doe65808@xyz.com"
                             />

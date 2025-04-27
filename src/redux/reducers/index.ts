@@ -1,4 +1,4 @@
-import userInfoReducer from "./userSlice";
+import userInfoReducer from "./userInfo";
 
 export {
     userInfoReducer
