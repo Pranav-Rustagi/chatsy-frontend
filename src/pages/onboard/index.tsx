@@ -1,19 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserInfoData } from "@/redux/reducers/userInfo";
+import { saveNewUserInfo, setUserInfoData } from "@/redux/reducers/userInfo";
 import { Button, Input } from "@/components";
 import { useRouter } from "next/router";
-import { RootState } from "@/redux/store/store";
+import { RootState, StoreDispatch } from "@/redux/store/store";
 import Image from "next/image";
 import Head from "next/head";
 import avatars from "@/constants/avatars";
 
 const OnboardPage = () => {
     const router = useRouter();
-    const dispatch = useDispatch();
-    const userInfo = useSelector((state: RootState) => state.userInfo).data;
-
-    console.log(userInfo);
+    const dispatch = useDispatch<StoreDispatch>();
+    const userInfo = useSelector((state: RootState) => state.userInfo.data);
 
     const [profilePicture, setProfilePicture] = useState<{ url: string, file: File | null, isDefault: boolean }>({
         url: userInfo?.avatar_url || avatars[0].url,
@@ -47,7 +45,7 @@ const OnboardPage = () => {
                 url: URL.createObjectURL(file),
                 file: file,
                 isDefault: false
-            })
+            });
         }
     }
 
@@ -64,7 +62,7 @@ const OnboardPage = () => {
     }
 
 
-    const handleSetupProfile = useCallback(() => {
+    const handleSetupProfile = useCallback(async () => {
         if (!userInfo?.username) {
             setUsernameError({
                 error: true,
@@ -86,16 +84,12 @@ const OnboardPage = () => {
             });
             return;
         }
-    }, [userInfo?.username]);
 
-    useEffect(() => {
-        if (userInfo?.onboarded) {
-            router.replace("/chats");
-        } else if (userInfo?.email === null) {
-            router.replace("/auth");
-        }
-    })
+        await dispatch(saveNewUserInfo(userInfo));
+        console.log("Saved successfully");
 
+        router.replace("/chats");
+    }, [userInfo?.username, userInfo]);
 
     return (
         <>

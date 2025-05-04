@@ -1,4 +1,4 @@
-import { CHECK_EXISTING_GOOGLE_USER_ROUTE } from "@/constants/routes";
+import { CHECK_EXISTING_USER_ROUTE, SAVE_NEW_USER_INFO_ROUTE } from "@/constants/routes";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -22,14 +22,28 @@ const initialState: UserInfoProps = {
     error: null
 }
 
-export const fetchGoogleUserData = createAsyncThunk(
-    "userInfo/fetchGoogleUserData",
+
+export const fetchUserData = createAsyncThunk(
+    "userInfo/fetchUserData",
     async (token: string, { rejectWithValue }) => {
         try {
-            const response = await axios.post(CHECK_EXISTING_GOOGLE_USER_ROUTE, { token });
+            const response = await axios.post(CHECK_EXISTING_USER_ROUTE, { token });
             const { user } = response.data.data;
             return user;
+        } catch (error) {
+            console.error(error);
+            return rejectWithValue(error);
+        }
+    }
+)
 
+
+export const saveNewUserInfo = createAsyncThunk(
+    "userInfo/saveUserInfoInDB",
+    async (data: UserInfoDataProps, { rejectWithValue }) => {
+        try {
+            await axios.post(SAVE_NEW_USER_INFO_ROUTE, data);
+            return true;
         } catch (error) {
             console.error(error);
             return rejectWithValue(error);
@@ -55,13 +69,17 @@ const userSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchGoogleUserData.fulfilled, (state, action) => {
-            if (action.payload !== null && action.payload.user !== null) {
-                state = {
-                    ...action.payload.user
-                }
-            } else {
-                state.data = null;
+        builder.addCase(fetchUserData.fulfilled, (state, action) => {
+            state.data = action.payload;
+
+            if (state.data !== null) {
+                state.data.onboarded = true;
+            }
+        }),
+        builder.addCase(saveNewUserInfo.fulfilled, (state) => {
+            state.data = {
+                ...state.data,
+                onboarded: true
             }
         })
     }
