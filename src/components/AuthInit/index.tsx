@@ -2,7 +2,6 @@ import { firebaseAuth } from "@/config/firebase.config";
 import { fetchUserData, setUserInfoData } from "@/redux/reducers/userInfo";
 import { StoreDispatch } from "@/redux/store/store";
 import { generateUserNameFromEmail, getHighQualityGoogleAvatar } from "@/utilities";
-import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

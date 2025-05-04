@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveNewUserInfo, setUserInfoData } from "@/redux/reducers/userInfo";
 import { Button, Input } from "@/components";

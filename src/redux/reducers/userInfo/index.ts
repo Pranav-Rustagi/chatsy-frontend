@@ -75,13 +75,14 @@ const userSlice = createSlice({
             if (state.data !== null) {
                 state.data.onboarded = true;
             }
-        }),
+        });
+
         builder.addCase(saveNewUserInfo.fulfilled, (state) => {
             state.data = {
                 ...state.data,
                 onboarded: true
             }
-        })
+        });
     }
 });
 

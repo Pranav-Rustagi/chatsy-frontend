@@ -71,7 +71,7 @@ const AuthPage = () => {
                                     type="checkbox"
                                     className="w-5 h-5 accent-chatsy-action-bg cursor-pointer"
                                     id="remember-me"
-                                    checked={Boolean(rememberMe)}
+                                    checked={rememberMe ? true : false}
                                     onChange={toggleRememberMe}
                                 />
 
