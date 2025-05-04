@@ -1,54 +1,32 @@
-import { signInWithPopup } from "firebase/auth";
-import { firebaseAuth, googleAuthProvider } from "@/config/firebase.config.js";
-import { useRouter } from "next/router";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { firebaseAuth } from "@/config/firebase.config.js";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGoogleUserData, setUserInfoData } from "@/redux/reducers/userInfo";
-import { generateUserNameFromEmail, getHighQualityGoogleAvatar } from "@/utilities";
+import { setUserInfoData } from "@/redux/reducers/userInfo";
+import { RootState, StoreDispatch } from "@/redux/store/store";
+import { useState } from "react";
 import { Button, Input } from "@/components";
-import store, { RootState, StoreDispatch } from "@/redux/store/store";
 import Image from "next/image";
 import Head from "next/head";
 
 const AuthPage = () => {
-    const router = useRouter();
-
     const dispatch = useDispatch<StoreDispatch>();
-    const userInfo = useSelector((state: RootState) => state.userInfo);
+    const userInfo = useSelector((state: RootState) => state.userInfo.data);
 
-    const handleGoogleAuth = async () => {
-        const authResult = await signInWithPopup(firebaseAuth, googleAuthProvider);
-        const idToken = await authResult.user.getIdToken() as string;
+    const [rememberMe, setRememberMe] = useState<boolean>(true);
 
-        const actionResult = await dispatch(fetchGoogleUserData(idToken));
 
-        if (fetchGoogleUserData.rejected.match(actionResult)) {
-            // something went wrong
-            console.error("Something went wrong");
-            return;
-        }
-
-        const userInfo = store.getState().userInfo;
-        const user = authResult.user;
-
-        if (userInfo.data === null) {
-            const user_data = {
-                email: user.email as string,
-                username: generateUserNameFromEmail(user.email as string),
-                avatar_url: getHighQualityGoogleAvatar(user.photoURL as string),
-                onboarded: false,
-                about: "Hey there! I'm using Chatsy."
-            }
-
-            dispatch(setUserInfoData(user_data));
-
-            router.replace("/onboard");
-        } else {
-            router.replace("/chats");
-        }
+    const toggleRememberMe = () => {
+        setRememberMe(!rememberMe);
     }
 
 
-    const handleAppleAuth = () => {
+    const handleGoogleAuth = () => {
+        const googleAuthProvider = new GoogleAuthProvider();
+        signInWithPopup(firebaseAuth, googleAuthProvider);
+    }
+
+
+    const handleFacebookAuth = () => {
         alert("Not implemented yet");
     }
 
@@ -58,29 +36,9 @@ const AuthPage = () => {
 
 
     const handleEmailInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setUserInfoData({email: e.target.value}));
+        dispatch(setUserInfoData({ email: e.target.value }));
     }
 
-
-    // useEffect(() => {
-    //     const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
-    //         const idToken = await user?.getIdToken();
-    //         console.log({
-    //             "onAuthStateChanged": idToken
-    //         });
-
-            // if (user && user.emailVerified) {
-            //     const userObj = {
-            //         email: user.email as string,
-            //         avatar_url: getHighQualityGoogleAvatar(user.photoURL as string)
-            //     }
-
-            //     handleUserLogin(userObj);
-            // }
-        // });
-
-    //     return () => unsubscribe();
-    // }, [handleUserLogin]);
 
     return (
         <>
@@ -98,15 +56,32 @@ const AuthPage = () => {
                         </h1>
 
                         <br /><br /><br />
-                        
+
                         <div className="flex flex-col w-[400px]">
                             <Input
                                 type="email"
                                 label="Email"
-                                value={userInfo.data?.email || ""}
+                                value={userInfo?.email || ""}
                                 onChange={handleEmailInputChange}
                                 placeholder="e.g. john.doe65808@xyz.com"
                             />
+
+                            <div className="flex items-center gap-2 mt-6">
+                                <input
+                                    type="checkbox"
+                                    className="w-5 h-5 accent-chatsy-action-bg cursor-pointer"
+                                    id="remember-me"
+                                    checked={rememberMe ? true : false}
+                                    onChange={toggleRememberMe}
+                                />
+
+                                <label 
+                                    className="text-sm text-chatsy-text-main font-semibold cursor-pointer"
+                                    htmlFor="remember-me"
+                                >
+                                    Remember me
+                                </label>
+                            </div>
 
                             <br />
 
@@ -117,34 +92,33 @@ const AuthPage = () => {
 
 
                         <div className="w-full text-center text-chatsy-text-main relative my-8 opacity-75 text-sm">
-                            <span className="px-5 bg-chatsy-bg leading-none relative z-40">Or continue with</span>
+                            <span className="px-5 bg-chatsy-bg leading-none relative z-40">or continue with</span>
                             <hr className="border-t-1 border-chatsy-text-main absolute w-full top-[calc(50%+1px)]" />
                         </div>
 
                         <div className="flex gap-5">
-                            <Button overrideClasses={["!w-1/2", "!bg-chatsy-text-main", "!text-chatsy-bg"]} onClick={handleGoogleAuth}>
-                                <Image
-                                    src="/icons/google_icon.svg"
-                                    alt="Authenticate with Google"
-                                    width="0" height="0" sizes="100vw"
-                                    className="w-[1.5rem] h-[1.5rem]"
-                                />
-                                &nbsp;&nbsp;
+                            <Button
+                                overrideClasses={["!w-1/2", "!bg-chatsy-text-main", "!text-chatsy-bg"]}
+                                icon={{
+                                    src: "/icons/google_icon.svg",
+                                    alt: "Authenticate with Google",
+                                    classes: "!w-[1.4rem] !h-[1.4rem]"
+                                }}
+                                onClick={handleGoogleAuth}
+                            >
                                 Google
                             </Button>
 
-                            <Button 
+                            <Button
                                 overrideClasses={["!w-1/2", "!bg-chatsy-text-main", "!text-chatsy-bg"]}
-                                onClick={handleAppleAuth}
+                                onClick={handleFacebookAuth}
+                                icon={{
+                                    src: "/icons/facebook_icon.svg",
+                                    alt: "Authenticate with Facebook",
+                                    classes: "!w-[1.6rem] !h-[1.6rem]"
+                                }}
                             >
-                                <Image
-                                    src="/icons/apple_icon.svg"
-                                    alt="Authenticate with Google"
-                                    width="0" height="0" sizes="100vw"
-                                    className="w-[1.5rem] h-[1.5rem] invert-(--chatsy-black-icon-invert)"
-                                />
-                                &nbsp;&nbsp;
-                                Apple
+                                Facebook
                             </Button>
                         </div>
                     </div>
