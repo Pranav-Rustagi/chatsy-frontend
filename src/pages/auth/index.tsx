@@ -12,7 +12,7 @@ const AuthPage = () => {
     const dispatch = useDispatch<StoreDispatch>();
     const userInfo = useSelector((state: RootState) => state.userInfo.data);
 
-    const [rememberMe, setRememberMe] = useState<Boolean>(true);
+    const [rememberMe, setRememberMe] = useState<boolean>(true);
 
 
     const toggleRememberMe = () => {
