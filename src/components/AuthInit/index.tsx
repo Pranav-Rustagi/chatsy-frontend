@@ -57,7 +57,7 @@ const AuthInit = () => {
         });
 
         return unsubscribe;
-    }, [firebaseAuth, dispatch, fetchUserData, setUserInfoData]);
+    }, [firebaseAuth, dispatch, fetchUserData, setUserInfoData, router.pathname, router.replace]);
 
     return null;
 }
