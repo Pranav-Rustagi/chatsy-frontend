@@ -9,10 +9,10 @@ interface ButtonProps {
         classes?: string;
     };
     onClick?: () => void;
-    overrideClasses?: string[];
+    className?: string;
 }
 
-const Button = ({ children = "Click me", variant = "md", icon, onClick = () => { }, overrideClasses = [] }: ButtonProps) => {
+const Button = ({ children = "Click me", variant = "md", icon, onClick = () => { }, className = "" }: ButtonProps) => {
     const sizeClasses: Record<string, string> = {
         "sm": "px-4 py-2 text-xs font-light",
         "md": "px-4 py-3",
@@ -22,7 +22,7 @@ const Button = ({ children = "Click me", variant = "md", icon, onClick = () => {
 
     return (
         <button
-            className={`bg-chatsy-action-bg text-chatsy-action-text rounded-full cursor-pointer flex justify-center items-center ${sizeClasses?.[variant] || sizeClasses["md"]} ${overrideClasses.join(' ')}`}
+            className={`bg-chatsy-action-bg text-chatsy-action-text rounded-full cursor-pointer flex justify-center items-center ${sizeClasses?.[variant] || sizeClasses["md"]} ${className}`}
             onClick={onClick}
         >
             {
