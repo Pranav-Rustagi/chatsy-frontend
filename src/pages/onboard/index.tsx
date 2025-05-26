@@ -133,7 +133,7 @@ const OnboardPage = () => {
 
                             <div className="flex gap-5 mt-5 mb-5">
 
-                                <Button onClick={handleRandomAvatar} variant="sm" overrideClasses={["!font-bold", "!rounded-sm"]}>
+                                <Button onClick={handleRandomAvatar} variant="sm" className={"!font-bold !rounded-sm"}>
                                     Random
                                 </Button>
 

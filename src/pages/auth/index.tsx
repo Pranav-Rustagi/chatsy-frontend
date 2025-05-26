@@ -98,7 +98,7 @@ const AuthPage = () => {
 
                         <div className="flex gap-5">
                             <Button
-                                overrideClasses={["!w-1/2", "!bg-chatsy-text-main", "!text-chatsy-bg"]}
+                                className={"!w-1/2 !bg-chatsy-text-main !text-chatsy-bg"}
                                 icon={{
                                     src: "/icons/google_icon.svg",
                                     alt: "Authenticate with Google",
@@ -110,7 +110,7 @@ const AuthPage = () => {
                             </Button>
 
                             <Button
-                                overrideClasses={["!w-1/2", "!bg-chatsy-text-main", "!text-chatsy-bg"]}
+                                className={"!w-1/2 !bg-chatsy-text-main !text-chatsy-bg"}
                                 onClick={handleFacebookAuth}
                                 icon={{
                                     src: "/icons/facebook_icon.svg",
