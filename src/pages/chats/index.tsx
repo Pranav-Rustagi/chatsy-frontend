@@ -1,7 +1,5 @@
 import Head from "next/head";
-import ChatSidebar from "./ChatSidebar";
-import ChatBox from "./ChatBox";
-import { Navbar } from "@/components";
+import { ChatBox, ChatSidebar } from "@/components";
 
 const ChatsPage = () => {
     return (

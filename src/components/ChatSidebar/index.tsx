@@ -62,7 +62,10 @@ const ChatSidebar = () => {
                 <div className="pl-3 pr-1 flex flex-col overflow-y-scroll">
                     {
                         Array.from({ length: 15 }, (_, index) => (
-                            <div className={`px-2 relative flex gap-3 items-center border-b-[0.5px] border-chatsy-navbar-border py-3 hover:bg-chatsy-tertiary-bg ${index === activeIndex ? "bg-chatsy-tertiary-light" : "bg-chatsy-secondary-bg"}`}>
+                            <div 
+                                key={index}
+                                className={`px-2 relative flex gap-3 items-center border-b-[0.5px] border-chatsy-navbar-border py-3 hover:bg-chatsy-tertiary-bg ${index === activeIndex ? "bg-chatsy-tertiary-light" : "bg-chatsy-secondary-bg"}`}
+                            >
                                 <Avatar src={`/avatars/avatar${index % 13 + 1}.jpg`} alt="User 1" />
                                 <div className="flex flex-col gap-1">
                                     <p className="text-sm font-semibold text-chatsy-text-main">User 2</p>

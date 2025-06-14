@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { Avatar, Button } from "@/components";
+import { Button, NavButton } from "@/components";
 import { useRouter } from "next/router";
-import NavButton from "./NavButton";
 
 const Navbar: React.FC = () => {
     const router = useRouter();

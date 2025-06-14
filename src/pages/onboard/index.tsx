@@ -89,7 +89,7 @@ const OnboardPage = () => {
         console.log("Saved successfully");
 
         router.replace("/chats");
-    }, [userInfo?.username, userInfo, dispatch, router.replace, setUsernameError]);
+    }, [userInfo, dispatch, router, setUsernameError]);
 
     return (
         <>

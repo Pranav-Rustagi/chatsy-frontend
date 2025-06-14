@@ -16,7 +16,7 @@ const LogOutPage = () => {
 
     return (
         <div>
-            We're sad to see you go
+            We&apos;re sad to see you go
         </div>
     )
 }

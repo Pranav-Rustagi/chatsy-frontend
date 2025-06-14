@@ -53,7 +53,9 @@ const AuthInit: (() => null) = () => {
     
                     dispatch(setUserInfoData(user_data));
     
-                    router.replace("/onboard");
+                    if (router.pathname !== "/onboard") {
+                        router.replace("/onboard");
+                    }
                 } else {
                     if (router.pathname === "/auth" || router.pathname === "/onboard" || router.pathname === "/") {
                         router.replace("/chats");
@@ -68,7 +70,7 @@ const AuthInit: (() => null) = () => {
         });
 
         return unsubscribe;
-    }, [dispatch, fetchUserData, setUserInfoData, router.pathname, router.replace]);
+    }, [dispatch, fetchUserData, setUserInfoData, router]);
 
     return null;
 }
