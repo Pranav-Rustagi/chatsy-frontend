@@ -6,7 +6,7 @@ interface AvatarProps {
     className?: string;
 }
 
-const Avatar = ({ src, alt, size = 50, active = false, className = "" }: AvatarProps) => {
+const Avatar: React.FC<AvatarProps> = ({ src, alt, size = 50, active = false, className = "" }: AvatarProps) => {
     return (
         <div
             className={`${className} relative rounded-full flex-none items-center justify-center z-[100]`}

@@ -12,7 +12,8 @@ interface ButtonProps {
     className?: string;
 }
 
-const Button = ({ children = "Click me", variant = "md", icon, onClick = () => { }, className = "" }: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({ children = "Click me", variant = "md", icon, onClick = () => { }, className = "" }: ButtonProps) => {
+
     const sizeClasses: Record<string, string> = {
         "sm": "px-4 py-2 text-xs font-light",
         "md": "px-4 py-3",

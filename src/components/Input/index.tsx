@@ -1,4 +1,4 @@
-interface inputProps {
+interface InputProps {
     type?: string,
     placeholder?: string,
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
@@ -10,7 +10,8 @@ interface inputProps {
     errorMessage?: null | string
 }
 
-const Input = ({ type = "text", placeholder = "", onChange, value = "", overrideClasses = [], label, labelOverrideClasses = [], error = false, errorMessage = null }: inputProps) => {
+const Input: React.FC<InputProps> = ({ type = "text", placeholder = "", onChange, value = "", overrideClasses = [], label, labelOverrideClasses = [], error = false, errorMessage = null }: InputProps) => {
+    
     return (
         <div className="relative">
             {

@@ -1,54 +1,67 @@
 import Image from "next/image";
-import Avatar from "../Avatar";
-import Button from "../Button";
+import { Avatar, Button } from "@/components";
+import { useRouter } from "next/router";
+import NavButton from "./NavButton";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
+    const router = useRouter();
+
     return (
         <div className="flex flex-col justify-between items-center min-w-[70px] max-w-[70px] bg-chatsy-secondary-bg border-r-[0.5px] border-chatsy-navbar-border py-7">
+
             <div className="flex flex-col gap-5 items-center">
-                <Button className={"bg-transparent aspect-square rounded-full !p-2 !border-1 border-chatsy-navbar-border"}>
-                    <Image
-                        src="/icons/ai-active.png"
-                        alt="Chats"
-                        className="opacity-40 invert-(--chatsy-black-icon-invert)"
-                        width={20} height={20}
-                    />
-                </Button>
+                <Image
+                    src="/icons/logo.png"
+                    alt="Chatsy Logo"
+                    width={40}
+                    height={40}
+                    className="mb-5"
+                />
+                <NavButton
+                    actionPath="/viora"
+                    srcPrefix="ai"
+                    alt="viora ai"
+                    text="Viora"
+                />
 
-                <Button className={"bg-chatsy-orange aspect-square rounded-full !p-2 !border-1 border-chatsy-orange"}>
-                    <Image
-                        src="/icons/chats-active.png"
-                        alt="Chats"
-                        className="invert-(--chatsy-invert-1)"
-                        width={20} height={20}
-                    />
-                </Button>
+                <NavButton
+                    actionPath="/chats"
+                    srcPrefix="chats"
+                    alt="chats"
+                    text="Chats"
+                />
 
-                <Button className={"bg-transparent aspect-square rounded-full !p-2 !border-1 border-chatsy-navbar-border"}>
-                    <Image
-                        src="/icons/call-active.png"
-                        alt="Call Log"
-                        className="opacity-40 invert-(--chatsy-black-icon-invert)"
-                        width={20} height={20}
-                    />
-                </Button>
-
+                <NavButton
+                    actionPath="calls"
+                    srcPrefix="call"
+                    alt="calls"
+                    text="Calls"
+                />
             </div>
             <div className="flex flex-col gap-3 items-center">
-                <Button className={"bg-transparent aspect-square rounded-full !p-2"}>
+                <Button 
+                    className={"bg-transparent aspect-square rounded-full !p-2"}
+                    onClick={() => router.replace('/settings')}
+                >
                     <Image
-                        src="/icons/settings-active.png"
+                        src="/icons/settings-inactive.png"
                         alt="Settings"
                         className="opacity-40 invert-(--chatsy-black-icon-invert)"
-                        width={30} height={30}
+                        width={28} height={28}
                     />
                 </Button>
 
-                <Avatar
-                    src="/avatars/avatar1.jpg"
-                    alt="User Display Name"
-                    size={40}
-                />
+                <Button 
+                    className={"bg-transparent aspect-square rounded-full !p-2"}
+                    onClick={() => router.replace('/logout')}
+                >
+                    <Image
+                        src="/icons/logout.png"
+                        alt="Settings"
+                        className="opacity-40 invert-(--chatsy-black-icon-invert)"
+                        width={28} height={28}
+                    />
+                </Button>
             </div>
         </div>
     )
