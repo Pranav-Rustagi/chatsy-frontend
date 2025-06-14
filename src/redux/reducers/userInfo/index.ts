@@ -32,7 +32,7 @@ export const fetchUserData = createAsyncThunk(
             return user;
         } catch (error) {
             console.error(error);
-            return rejectWithValue(error);
+            return rejectWithValue("Failed to fetch user data");
         }
     }
 )
@@ -46,7 +46,7 @@ export const saveNewUserInfo = createAsyncThunk(
             return true;
         } catch (error) {
             console.error(error);
-            return rejectWithValue(error);
+            return rejectWithValue("Failed to save user data");
         }
     }
 )

@@ -102,7 +102,7 @@ const AuthPage = () => {
                                 icon={{
                                     src: "/icons/google_icon.svg",
                                     alt: "Authenticate with Google",
-                                    classes: "!w-[1.4rem] !h-[1.4rem]"
+                                    classes: "!w-[1.2rem] !h-[1.2rem]"
                                 }}
                                 onClick={handleGoogleAuth}
                             >
