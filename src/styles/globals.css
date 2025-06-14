@@ -1,65 +1,87 @@
 @import "tailwindcss";
 
 :root {
+    --chatsy-white: #ffffff;
     --chatsy-dark: #171717;
     --chatsy-light: #fafafa;
-    --chatsy-orange: #dd7a29;
-    --chatsy-shadow-color-light: #dcdcdc;
-    --chatsy-shadow-color-dark: #0a0a0a;
+    --chatsy-orange-dark: #dd7a29;
+    --chatsy-orange-light: #ff8904;
 
-    --chatsy-black-icon-invert: 1;
 
-    /* --chatsy-input-color: #333;
-    --chatsy-input-placeholder-color: #666;
-    --chatsy-input-border-color: #ccc; */
+    --chatsy-dark-secondary: #1a1a1a;
+    --chatsy-light-secondary: #fdfdfd;
+    /* 262a2f */
 
-    /* --chatsy-secondary-dark: #222;
-    --chatsy-ternary-dark: #333;
-    --chatsy-orange-primary: #c46b23;
-    --chatsy-almost-black: #0a0a0a;
-    --chatsy-black-transparent: #0a0a0a80; */
+
+    --chatsy-light-tertiary: #f4f4f4;
+    --chatsy-dark-tertiary: #282828;
+
+
+    --chatsy-navbar-dark: #171717;
+    --chatsy-navbar-light: #e4e4e4;
+    
+    --chatsy-border-light: #00000023;
+    --chatsy-border-dark: #393939;
+
+    --chatsy-black-icon-invert: 0;
+    --chatsy-white-icon-invert: 1;
+    --chatsy-invert-1: 1;
+    --chatsy-invert-0: 0;
 
 
     --chatsy-bg: var(--chatsy-light);
+    --chatsy-secondary-bg: var(--chatsy-light-secondary);
+    --chatsy-tertiary-bg: var(--chatsy-light-tertiary);
     --chatsy-text-main: var(--chatsy-dark);
     --chatsy-action-bg: var(--chatsy-dark);
     --chatsy-action-text: var(--chatsy-light);
-    --chatsy-shadow-color: var(--chatsy-shadow-color-light);
+    --chatsy-navbar: var(--chatsy-navbar-light);
+    --chatsy-navbar-border: var(--chatsy-border-light);
+    --chatsy-orange: var(--chatsy-orange-light);
 }
 
 html.dark {
     --chatsy-bg: var(--chatsy-dark);
+    --chatsy-secondary-bg: var(--chatsy-dark-secondary);
+    --chatsy-tertiary-bg: var(--chatsy-dark-tertiary);
     --chatsy-text-main: var(--color-white);
-    --chatsy-action-bg: var(--chatsy-orange);
+    --chatsy-action-bg: var(--chatsy-orange-dark);
     --chatsy-action-text: var(--chatsy-light);
-    --chatsy-shadow-color: var(--chatsy-shadow-color-dark);
-
-    --chatsy-black-icon-invert: 0;
+    --chatsy-navbar: var(--chatsy-navbar-dark);
+    --chatsy-navbar-border: var(--chatsy-border-dark);
+    --chatsy-orange: var(--chatsy-orange-dark);
+    --chatsy-black-icon-invert: 1;
+    --chatsy-white-icon-invert: 0;
 }
 
 @theme inline {
-    /* --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono); */
-
+    --color-chatsy-dark: var(--chatsy-dark);
+    --color-chatsy-light: var(--chatsy-light);
+    --color-chatsy-secondary-dark: var(--chatsy-dark-secondary);
+    --color-chatsy-secondary-light: var(--chatsy-light-secondary);
+    --color-chatsy-tertiary-light: var(--chatsy-light-tertiary);
+    --color-chatsy-orange-dark: var(--color-chatsy-orange-dark);
+    --color-chatsy-orange-light: var(--color-chatsy-orange-light);
+    
     --color-chatsy-bg: var(--chatsy-bg);
+    --color-chatsy-secondary-bg: var(--chatsy-secondary-bg);
+    --color-chatsy-tertiary-bg: var(--chatsy-tertiary-bg);
     --color-chatsy-text-main: var(--chatsy-text-main);
     --color-chatsy-text-dark: var(--chatsy-dark);
     --color-chatsy-action-bg: var(--chatsy-action-bg);
     --color-chatsy-action-text: var(--chatsy-action-text);
+    --color-chatsy-navbar: var(--chatsy-navbar);
+    --color-chatsy-navbar-border: var(--chatsy-navbar-border);
+    --color-chatsy-orange: var(--chatsy-orange);
 
-    --color-chatsy-shadow: var(--chatsy-shadow-color);
-
+    --text-chatsy-text-xs: 0.75rem;
+    --text-chatsy-text-2xs: 0.6rem;
     --chatsy-black-icon-invert: var(--chatsy-black-icon-invert);
+    --chatsy-white-icon-invert: var(--chatsy-white-icon-invert);
+    --chatsy-invert-1: var(--chatsy-invert-1);
+    --chatsy-invert-0: var(--chatsy-invert-0);
 
     --animate-beat: beat 1s infinite;
-
-    /* -color-chatsy-background: var() */
-    /* --color-chatsy-dark: var(--background); */
-    /* --color-chatsy-secondary-dark: var(--chatsy-secondary-dark);
-    --color-chatsy-ternary-dark: var(--chatsy-ternary-dark);
-    --color-chatsy-orange-primary: var(--chatsy-orange-primary);
-    --color-chatsy-almost-black: var(--chatsy-almost-black);
-    --color-chatsy-black-transparent: var(--chatsy-black-transparent); */
 }
 
 
@@ -76,4 +98,41 @@ html.dark {
 
 #__next {
     height: 100vh;
+}
+
+.to-message-container::after {
+    content: "";
+    position: absolute;
+    width: 1rem;
+    height: 0.5rem;
+    border: 1rem solid transparent;
+    border-left: 0.25rem transparent;
+    border-top: 0.5rem solid var(--chatsy-orange);
+    left: calc(100% - 0.25rem);
+    z-index: 1000;
+    top: 0;
+}
+
+.from-message-container::after {
+    content: "";
+    position: absolute;
+    width: 1rem;
+    height: 0.5rem;
+    border: 1rem solid transparent;
+    border-right: 0.25rem transparent;
+    border-top: 0.5rem solid var(--chatsy-white);
+    right: calc(100% - 0.25rem);
+    z-index: 1000;
+    top: 0;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    padding: 0 1px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgray;
+    border-radius: 10px;
+    width: 4px;
 }
