@@ -16,7 +16,7 @@ const NavButton: React.FC<NavButtonProps> = ({ actionPath,  srcPrefix, alt, size
 
     return (
         <Button
-            className={`group !relative aspect-square !p-2 flex flex-col !rounded-sm ${isActive ? 'bg-chatsy-orange' : 'bg-transparent'}`}
+            className={`group !relative aspect-square !p-4 flex flex-col !rounded-full ${isActive ? 'bg-chatsy-orange' : 'bg-chatsy-secondary-bg'}`}
             onClick={() => router.replace(actionPath)}
         >
             <Image
@@ -25,9 +25,6 @@ const NavButton: React.FC<NavButtonProps> = ({ actionPath,  srcPrefix, alt, size
                 className={isActive ? 'invert-(--chatsy-invert-1)' : 'opacity-50 invert-(--chatsy-black-icon-invert)'}
                 width={size} height={size}
             />
-            <span className={`${isActive ? 'text-chatsy-action-text' : 'text-chatsy-text-main'} mt-2 text-chatsy-text-2xs`}>
-                {text}
-            </span>
         </Button>
     )
 }

@@ -8,14 +8,14 @@ const Navbar: React.FC = () => {
     return (
         <div className="flex flex-col justify-between items-center min-w-[70px] max-w-[70px] bg-chatsy-secondary-bg border-r-[0.5px] border-chatsy-navbar-border py-7">
 
-            <div className="flex flex-col gap-5 items-center">
-                <Image
-                    src="/icons/logo.png"
-                    alt="Chatsy Logo"
-                    width={40}
-                    height={40}
-                    className="mb-5"
-                />
+            <Image
+                src="/icons/logo.png"
+                alt="Chatsy Logo"
+                width={50}
+                height={50}
+                className="mb-5"
+            />
+            <div className="flex flex-col gap-5 items-center p-1 rounded-full bg-chatsy-tertiary-bg">
                 <NavButton
                     actionPath="/viora"
                     srcPrefix="ai"
@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
                 />
             </div>
             <div className="flex flex-col gap-3 items-center">
-                <Button 
+                <Button
                     className={"bg-transparent aspect-square rounded-full !p-2"}
                     onClick={() => router.replace('/settings')}
                 >
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
                     />
                 </Button>
 
-                <Button 
+                <Button
                     className={"bg-transparent aspect-square rounded-full !p-2"}
                     onClick={() => router.replace('/logout')}
                 >

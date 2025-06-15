@@ -1,27 +1,37 @@
 import { Avatar } from "@/components";
 import Image from "next/image";
+import { useState } from "react";
 
 
 const ChatSidebar = () => {
+    const [searchText, setSearchText] = useState<string>("");
+
     const activeIndex = -1;
 
     return (
         <div className="flex flex-col min-w-[400px] max-w-[400px] border-r-[0.5px] border-chatsy-navbar-border bg-chatsy-secondary-bg overflow-hidden">
             <div className="flex gap-3 bg-chatsy-secondary-bg z-50 p-5 pt-7">
                 <div className="inline-block w-full relative">
-                    <div className="flex items-center gap-2 mb-2 opacity-50 text-chatsy-text-main text-sm absolute top-[50%] -translate-y-[60%] left-4">
-                        <Image 
-                            src={"/icons/search.png"}
-                            alt="Chats"
-                            width={16}
-                            height={16}
-                            className="invert-(--chatsy-black-icon-invert)"
-                        />
-                        <span>Search</span>
-                    </div>
+                    {
+                        searchText === "" &&
+                        (
+                            <div className="flex items-center gap-2 mb-2 opacity-50 text-chatsy-text-main text-sm absolute top-[50%] -translate-y-[60%] left-4">
+                                <Image
+                                    src={"/icons/search.png"}
+                                    alt="Chats"
+                                    width={16}
+                                    height={16}
+                                    className="invert-(--chatsy-black-icon-invert)"
+                                />
+                                <span>Search</span>
+                            </div>
+                        )
+                    }
                     <input
                         type="text"
+                        value={searchText}
                         className="w-full bg-chatsy-tertiary-bg text-chatsy-text-main text-sm border-[0.5px] border-chatsy-navbar-border rounded-full px-4 py-2 focus:outline-none"
+                        onChange={(e) => setSearchText(e.target.value)}
                     />
                 </div>
 
@@ -62,7 +72,7 @@ const ChatSidebar = () => {
                 <div className="pl-3 pr-1 flex flex-col overflow-y-scroll">
                     {
                         Array.from({ length: 15 }, (_, index) => (
-                            <div 
+                            <div
                                 key={index}
                                 className={`px-2 relative flex gap-3 items-center border-b-[0.5px] border-chatsy-navbar-border py-3 hover:bg-chatsy-tertiary-bg ${index === activeIndex ? "bg-chatsy-tertiary-light" : "bg-chatsy-secondary-bg"}`}
                             >

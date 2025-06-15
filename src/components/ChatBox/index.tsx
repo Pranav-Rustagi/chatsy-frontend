@@ -3,7 +3,7 @@ import MessageBox from "../Message";
 
 const ChatBox = () => {
     return (
-        <div className="w-full relative">
+        <div className="w-full relative bg-black/5">
             <div className="absolute w-full h-full left-0 top-0 bg-[url(/images/gi_DckOUM5a.png)] bg-size-cover mix-blend-exclusion bg-blend-multiply opacity-[0.1] z-0">
             </div>
 
@@ -25,7 +25,7 @@ const ChatBox = () => {
                 </div>
 
                 <div className="grow overflow-hidden pr-1">
-                    <div className="overflow-y-scroll flex flex-col gap-4 h-full w-full py-5">
+                    <div className="overflow-y-scroll flex flex-col gap-4 h-full w-full py-5 px-2">
                         <MessageBox message="Hello, how are you?" sender="User 1" timestamp="10:00 AM" type="from" />
                         <MessageBox message="I'm good, thanks! How about you?" sender="User 2" timestamp="10:01 AM" type="to" />
                         <MessageBox message="Hello, how are you?" sender="User 1" timestamp="10:00 AM" type="from" />
