@@ -6,12 +6,13 @@ interface AvatarProps {
     size?: number;
     active?: boolean;
     className?: string;
+    invert?: boolean;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ src, alt, size = 50, active = false, className = "" }: AvatarProps) => {
+const Avatar: React.FC<AvatarProps> = ({ src, alt, size = 50, active = false, className = "", invert = false }: AvatarProps) => {
     return (
         <div
-            className={`${className} relative rounded-full flex-none items-center justify-center z-[100]`}
+            className={`relative rounded-full flex-none items-center justify-center z-[100] ${className} `}
             style={{
                 height: `${size}px`,
                 width: `${size}px`,
@@ -22,7 +23,7 @@ const Avatar: React.FC<AvatarProps> = ({ src, alt, size = 50, active = false, cl
                 alt={alt}
                 width="0" height="0"
                 sizes="100vw"
-                className="rounded-full h-full w-full"
+                className={`rounded-full h-full w-full ${invert ? "invert-(--chatsy-invert-1)" : ""}`}
             />
 
             {

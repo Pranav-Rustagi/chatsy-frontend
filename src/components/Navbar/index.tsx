@@ -6,16 +6,8 @@ const Navbar: React.FC = () => {
     const router = useRouter();
 
     return (
-        <div className="flex flex-col justify-between items-center min-w-[70px] max-w-[70px] bg-chatsy-secondary-bg border-r-[0.5px] border-chatsy-navbar-border py-7">
-
-            <Image
-                src="/icons/logo.png"
-                alt="Chatsy Logo"
-                width={50}
-                height={50}
-                className="mb-5"
-            />
-            <div className="flex flex-col gap-5 items-center p-1 rounded-full bg-chatsy-tertiary-bg">
+        <div className="flex flex-col justify-between items-center min-w-[80px] max-w-[70px] bg-chatsy-tertiary-bg border-r-[0.5px] border-chatsy-navbar-border py-7 relative z-[1000]">
+            <div className="flex flex-col gap-5 items-center p-1 rounded-full">
                 <NavButton
                     actionPath="/viora"
                     srcPrefix="ai"

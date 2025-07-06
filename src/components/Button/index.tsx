@@ -12,7 +12,7 @@ interface ButtonProps {
     className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ children = "Click me", variant = "md", icon, onClick = () => { }, className = "" }: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({ children = null, variant = "md", icon, onClick = () => { }, className = "" }: ButtonProps) => {
 
     const sizeClasses: Record<string, string> = {
         "sm": "px-4 py-2 text-xs font-light",
@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({ children = "Click me", variant = "md", 
 
     return (
         <button
-            className={`bg-chatsy-action-bg text-chatsy-action-text rounded-full cursor-pointer flex justify-center items-center ${sizeClasses?.[variant] || sizeClasses["md"]} ${className}`}
+            className={`bg-chatsy-action-bg text-chatsy-action-text rounded-full hover:cursor-pointer flex justify-center items-center ${sizeClasses?.[variant] || sizeClasses["md"]} ${className}`}
             onClick={onClick}
         >
             {
@@ -36,7 +36,10 @@ const Button: React.FC<ButtonProps> = ({ children = "Click me", variant = "md", 
                             width="0" height="0" sizes="100vw"
                             className={`w-[1.5rem] h-[1.5rem] ${icon.classes || ""}`}
                         />
-                        &nbsp;&nbsp;
+                        {
+                            children !== null &&
+                            <>&nbsp;&nbsp;</>
+                        }
                     </>
                 )
             }
