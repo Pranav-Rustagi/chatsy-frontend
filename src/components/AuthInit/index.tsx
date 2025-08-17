@@ -1,5 +1,5 @@
 import { firebaseAuth } from "@/config/firebase.config";
-import { fetchUserData, setUserInfoData } from "@/redux/reducers/userInfo";
+import { fetchUserData, setUserInfoData, UserInfoDataProps } from "@/redux/reducers/userInfo";
 import { StoreDispatch } from "@/redux/store/store";
 import { generateUserNameFromEmail, getHighQualityGoogleAvatar } from "@/utilities";
 import { useRouter } from "next/router";
@@ -43,13 +43,13 @@ const AuthInit: (() => null) = () => {
                 const userInfo = actionResult.payload;
     
                 if (userInfo === null) {
-                    const userData = {
+                    const userData: UserInfoDataProps = {
                         email: user.email as string,
                         username: generateUserNameFromEmail(user.email as string),
                         displayName: user.displayName || "New User",
                         avatarUrl: getHighQualityGoogleAvatar(user.photoURL as string),
                         onboarded: false,
-                        about: "Hey there! I'm using Chatsy."
+                        description: "Hey there! I'm using Chatsy."
                     }
     
                     dispatch(setUserInfoData(userData));
