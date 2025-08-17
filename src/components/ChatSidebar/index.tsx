@@ -58,7 +58,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({ setSidebarState, sidebarState
                 <div className="flex gap-3 items-center overflow-hidden">
                     {
                         Array.from({ length: 10 }, (_, index) => (
-                            <Button className="!p-0">
+                            <Button className="!p-0" key={`online-user-${index}`}>
                                 <Avatar
                                     key={index}
                                     src={`/avatars/avatar${index % 13 + 1}.jpg`}

@@ -8,7 +8,7 @@ export interface UserInfoDataProps {
     displayName?: null | string;
     avatarUrl?: null | string;
     onboarded?: boolean;
-    about?: string;
+    description?: string;
 }
 
 

@@ -24,6 +24,7 @@ const NavButton: React.FC<NavButtonProps> = ({ actionPath,  srcPrefix, alt, size
                 alt={alt}
                 className={isActive ? 'invert-(--chatsy-invert-1)' : 'opacity-50 invert-(--chatsy-black-icon-invert)'}
                 width={size} height={size}
+                title={text}
             />
         </Button>
     )

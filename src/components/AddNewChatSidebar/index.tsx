@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, SearchBar, UserItem } from "@/components";
+import { UserInfoDataProps } from "@/redux/reducers/userInfo";
 
 interface AddNewChatSidebarProps {
     setSidebarState: (state: "chats" | "new-chat" | "add-new-chat") => void;
@@ -9,13 +10,33 @@ interface AddNewChatSidebarProps {
 const AddNewChatSidebar: React.FC<AddNewChatSidebarProps> = ({ setSidebarState, sidebarState }) => {
     const [searchText, setSearchText] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
-    const [searchResults, setSearchResults] = useState<Array<Object>>([]);
+    const [searchResults, setSearchResults] = useState<Array<UserInfoDataProps>>([]);
 
     useEffect(() => {
         setLoading(true);
 
         const timer = setTimeout(() => {
             setLoading(false);
+            setSearchResults([
+                {
+                    avatarUrl: "/avatars/avatar1.jpg",
+                    username: "User 1",
+                    description: "Hey I am using Chatsy, let's connect!",
+                    name: "John Doe (You)"
+                },
+                {
+                    avatarUrl: "/avatars/avatar2.jpg",
+                    username: "User 2",
+                    description: "Hello! Let's chat.",
+                    name: "Jane Smith"
+                },
+                {
+                    avatarUrl: "/avatars/avatar3.jpg",
+                    username: "User 3",
+                    description: "Looking forward to connecting!",
+                    name: "Alice Johnson"
+                }
+            ]);
         }, 1500);
 
         return () => clearTimeout(timer);
@@ -48,13 +69,14 @@ const AddNewChatSidebar: React.FC<AddNewChatSidebarProps> = ({ setSidebarState, 
                     null :
                     <div className="flex z-50 p-3 pt-0 flex-col overflow-y-scroll">
                         {
-                            searchResults.map((userInfo) => {
+                            searchResults.map((userInfo: UserInfoDataProps) => {
                                 return (
                                     <UserItem
-                                        avatarUrl="/avatars/avatar2.jpg"
-                                        username="User 1"
-                                        description="Hey I am using Chatsy, let's connect!"
-                                        name="John Doe (You)"
+                                        key={userInfo.username}
+                                        avatarUrl={userInfo.avatarUrl as string}
+                                        username= {userInfo.username as string}
+                                        description= {userInfo.description as string}
+                                        name= {userInfo.displayName as string}
                                     />
                                 )
                             })
