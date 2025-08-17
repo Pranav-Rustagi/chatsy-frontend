@@ -22,19 +22,19 @@ const AddNewChatSidebar: React.FC<AddNewChatSidebarProps> = ({ setSidebarState, 
                     avatarUrl: "/avatars/avatar1.jpg",
                     username: "User 1",
                     description: "Hey I am using Chatsy, let's connect!",
-                    name: "John Doe (You)"
+                    displayName: "John Doe (You)"
                 },
                 {
                     avatarUrl: "/avatars/avatar2.jpg",
                     username: "User 2",
                     description: "Hello! Let's chat.",
-                    name: "Jane Smith"
+                    displayName: "Jane Smith"
                 },
                 {
                     avatarUrl: "/avatars/avatar3.jpg",
                     username: "User 3",
                     description: "Looking forward to connecting!",
-                    name: "Alice Johnson"
+                    displayName: "Alice Johnson"
                 }
             ]);
         }, 1500);
