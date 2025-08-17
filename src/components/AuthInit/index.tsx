@@ -43,15 +43,16 @@ const AuthInit: (() => null) = () => {
                 const userInfo = actionResult.payload;
     
                 if (userInfo === null) {
-                    const user_data = {
+                    const userData = {
                         email: user.email as string,
                         username: generateUserNameFromEmail(user.email as string),
-                        avatar_url: getHighQualityGoogleAvatar(user.photoURL as string),
+                        displayName: user.displayName || "New User",
+                        avatarUrl: getHighQualityGoogleAvatar(user.photoURL as string),
                         onboarded: false,
                         about: "Hey there! I'm using Chatsy."
                     }
     
-                    dispatch(setUserInfoData(user_data));
+                    dispatch(setUserInfoData(userData));
     
                     if (router.pathname !== "/onboard") {
                         router.replace("/onboard");

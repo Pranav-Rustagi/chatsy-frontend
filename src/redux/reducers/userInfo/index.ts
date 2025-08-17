@@ -5,7 +5,8 @@ import axios from "axios";
 export interface UserInfoDataProps {
     email?: null | string;
     username?: null | string;
-    avatar_url?: null | string;
+    displayName?: null | string;
+    avatarUrl?: null | string;
     onboarded?: boolean;
     about?: string;
 }
