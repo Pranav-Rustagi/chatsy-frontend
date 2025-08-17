@@ -27,9 +27,9 @@ const ChatBox = () => {
                 <div className="grow overflow-hidden pr-1">
                     <div className="overflow-y-scroll flex flex-col gap-4 h-full w-full py-5 px-2">
                         <MessageBox message="Hello, how are you?" sender="User 1" timestamp="10:00 AM" type="from" />
-                        <MessageBox message="I'm good, thanks! How about you?" sender="User 2" timestamp="10:01 AM" type="to" />
+                        <MessageBox message="I'm good, thanks! How about you? okokokokkookkookkokkokokokokookkokookokokokokokokokkookkookkokkokokokokookkokookokokokokokokokkookkookkokkokokokokookkokookokokokokokokokkookkookkokkokokokokookkokookokokok" sender="User 2" timestamp="10:01 AM" type="to" />
                         <MessageBox message="Hello, how are you?" sender="User 1" timestamp="10:00 AM" type="from" />
-                        <MessageBox message="I'm good, thanks! How about you?" sender="User 2" timestamp="10:01 AM" type="to" />
+                        <MessageBox message="I'm good, thanks! How about you? I am just a baby who is child of a crocodile" sender="User 2" timestamp="10:01 AM" type="to" />
                         <MessageBox message="Hello, how are you?" sender="User 1" timestamp="10:00 AM" type="from" />
                         <MessageBox message="I'm good, thanks! How about you?" sender="User 2" timestamp="10:01 AM" type="to" />
                         <MessageBox message="Hello, how are you?" sender="User 1" timestamp="10:00 AM" type="from" />
@@ -46,11 +46,12 @@ const ChatBox = () => {
                     <input
                         type="text" name="" id=""
                         placeholder="Type a message..."
-                        className="flex-auto bg-chatsy-tertiary-bg text-sm border-[0.5px] border-chatsy-navbar-border rounded-full px-4 py-3 text-chatsy-text-main placeholder:text-chatsy-text-main placeholder:opacity-50 focus:outline-none"
+                        className="flex-auto bg-chatsy-tertiary-bg text-sm border-[0.5px] border-chatsy-navbar-border rounded-full px-4 py-3 text-chatsy-text-main placeholder:text-chatsy-text-main placeholder:opacity-50 focus:outline-none w-full"
                     />
 
-                    <button className="rounded-full py-3 px-4 bg-chatsy-orange text-white h-[2.5rem] aspect-square flex items-center justify-center border-[0.5px] border-chatsy-navbar-border text-xs">
-                        Send
+                    <button className="rounded-full py-3 px-4 bg-chatsy-orange text-white h-[2.5rem] flex items-center justify-center border-[0.5px] border-chatsy-navbar-border text-sm">
+                        Send&nbsp;&nbsp;
+                        <img src="icons/send_msg.png" alt="Send message" height="20px" width="20px" />
                     </button>
                 </div>
             </div>
