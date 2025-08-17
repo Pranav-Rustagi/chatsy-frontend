@@ -30,7 +30,7 @@ const Input: React.FC<InputProps> = ({ type = "text", placeholder = "", onChange
                         value={value}
                         onChange={onChange}
                         spellCheck={false}
-                        className={`w-full border-1 border-gray-400 p-3 pt-4 rounded-md text-chatsy-text-light placeholder:text-gray-400 outline-none text-md font-medium ${overrideClasses.join(' ')}`}
+                        className={`w-full border-1 border-gray-400 p-3 pt-4 rounded-md text-chatsy-text-main placeholder:text-gray-400 outline-none text-md font-medium ${overrideClasses.join(' ')}`}
                     />
                     {
                         error &&

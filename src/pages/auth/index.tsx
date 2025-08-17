@@ -100,9 +100,9 @@ const AuthPage = () => {
                             <Button
                                 className={"!w-1/2 !bg-chatsy-text-main !text-chatsy-bg"}
                                 icon={{
-                                    src: "/icons/google_icon.svg",
+                                    src: "/icons/google_icon.png",
                                     alt: "Authenticate with Google",
-                                    classes: "!w-[1.2rem] !h-[1.2rem]"
+                                    classes: "!w-[1.6rem] !h-[1.6rem]"
                                 }}
                                 onClick={handleGoogleAuth}
                             >
@@ -113,7 +113,7 @@ const AuthPage = () => {
                                 className={"!w-1/2 !bg-chatsy-text-main !text-chatsy-bg"}
                                 onClick={handleFacebookAuth}
                                 icon={{
-                                    src: "/icons/facebook_icon.svg",
+                                    src: "/icons/facebook_icon.png",
                                     alt: "Authenticate with Facebook",
                                     classes: "!w-[1.6rem] !h-[1.6rem]"
                                 }}

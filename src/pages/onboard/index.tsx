@@ -14,7 +14,7 @@ const OnboardPage = () => {
     const userInfo = useSelector((state: RootState) => state.userInfo.data);
 
     const [profilePicture, setProfilePicture] = useState<{ url: string, file: File | null, isDefault: boolean }>({
-        url: userInfo?.avatar_url || avatars[0].url,
+        url: userInfo?.avatarUrl || avatars[0].url,
         file: null,
         isDefault: true
     });
@@ -57,8 +57,8 @@ const OnboardPage = () => {
         dispatch(setUserInfoData({ username: e.target.value.trim() }));
     }
 
-    const handleAboutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setUserInfoData({ about: e.target.value }));
+    const handleDisplayNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(setUserInfoData({ displayName: e.target.value }));
     }
 
 
@@ -164,9 +164,9 @@ const OnboardPage = () => {
 
                             <div className="relative">
                                 <Input
-                                    value={userInfo?.about}
-                                    onChange={handleAboutChange}
-                                    label="Bio"
+                                    value={userInfo?.displayName || ""}
+                                    onChange={handleDisplayNameChange}
+                                    label="Display Name"
                                     errorMessage={null}
                                 />
                             </div>
